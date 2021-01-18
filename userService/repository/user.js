@@ -7,7 +7,7 @@ mongoose.Promise = global.Promise;
 const userSchema = new mongoose.Schema({
   _id: { type: String, default: uuid },
   email: { type: String },
-  password: { type: String, hide: false, select: false },
+  password: { type: String, hide: false, select: true },
   name: { type: String, hide: false },
   phoneNumber: { type: String, hide: false },
 }, {
