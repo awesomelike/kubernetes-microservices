@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const userService = require('../grpc/client');
+const userService = require('../grpc/userService');
 
 const router = Router();
 

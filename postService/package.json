@@ -1,0 +1,26 @@
+{
+  "name": "posts-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/proto-loader": "^0.5.5",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "grpc": "^1.24.4",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.12",
+    "mongoose-hidden": "^1.9.1",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.18.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
+  }
+}
