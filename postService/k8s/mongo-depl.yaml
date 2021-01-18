@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: users-mongo-depl
+  name: posts-mondo-depl
   labels:
-    app: users-mongodb
+    app: posts-mongodb
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: users-mongodb
+      app: posts-mongodb
   template:
     metadata:
       labels:
-        app: users-mongodb
+        app: posts-mongodb
     spec:
       containers:
-      - name: users-mongodb
+      - name: posts-mongodb
         image: mongo
         resources:
           limits:
@@ -27,21 +27,21 @@ spec:
         - name: MONGO_INITDB_ROOT_USERNAME
           valueFrom:
             secretKeyRef:
-              name: users-mongo-secret
+              name: posts-mongo-secret
               key: MONGO_ROOT_USERNAME
         - name: MONGO_INITDB_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: users-mongo-secret
+              name: posts-mongo-secret
               key: MONGO_ROOT_PASSWORD
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: users-mongo-service
+  name: posts-mongodb-service
 spec:
   selector:
-    app: users-mongodb
+    app: posts-mongodb
   ports:
     - protocol: TCP
       port: 27017

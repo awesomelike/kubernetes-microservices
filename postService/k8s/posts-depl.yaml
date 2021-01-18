@@ -2,52 +2,52 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: users-service
+    app: posts-service
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: users-service
+      app: posts-service
     template:
       metadata:
         labels:
-          app: users-service
+          app: posts-service
       spec:
         containers:
-        - name: kubmic-users
-          image: kubmic-users
+        - name: kubmic-posts
+          image: kubmic-posts
           ports:
-          - containerPort: 50051
+          - containerPort: 50052
           env:
           - name: MONGODB_USER
             valueFrom:
               secretKeyRef:
-                name: users-mongo-secret
+                name: posts-mongo-secret
                 key: MONGO_ROOT_USERNAME
           - name: MONGODB_PASS
             valueFrom:
               secretKeyRef:
-                name: users-mongo-secret
+                name: posts-mongo-secret
                 key: MONGO_ROOT_PASSWORD
           - name: MONGODB_SERVER
             valueFrom:
               configMapKeyRef:
-                name: users-mongo-configmap
+                name: posts-mongo-configmap
                 key: MONGO_SERVER
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: users-service
+  name: posts-service
 spec:
   selector:
-    app: users-service
+    app: posts-service
   type: ClusterIP
   ports:
     - protocol: TCP
-      port: 50051
-      targetPort: 50051
-      nodePort: 30000
+      port: 50052
+      targetPort: 50052
+      nodePort: 30001
               
 
         
