@@ -1,12 +1,13 @@
 const userService = require('../grpc/userService');
 
 module.exports = (req, res, next) => {
-  if (!req.body.email || !req.body.password) {
+  const { authorization } = req.headers;
+  const token = authorization;
+  if (!token) {
     return res.sendStatus(401);
   }
   userService.auth({
-    email: req.body.email,
-    password: req.body.password
+    token
   }, (e, r) => {
     if (e) {
       console.log(e);

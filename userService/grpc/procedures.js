@@ -9,7 +9,6 @@ module.exports = {
     if (!user) {
       return callback({ code: 'USER_NOT_FOUND' });
     }
-    console.log('FOUND_USER', user);
     if (!bcrypt.compareSync(request.password, user.password)) {
       callback({ code: 'UNAUTHORIZED' });
     }
@@ -42,6 +41,7 @@ module.exports = {
       const { token } = request;
       const user = await auth.verifyToken(token);
       if (user) {
+        console.log('AUTH_SUCCESS!');
         return callback(null, {
           id: user.id,
           email: user.email,

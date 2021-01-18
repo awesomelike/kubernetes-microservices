@@ -6,8 +6,8 @@ mongoose.Promise = global.Promise;
 
 const postSchema = new mongoose.Schema({
   _id: { type: String, default: uuid },
-  title: { type: String },
-  body: { type: String },
+  title: { type: String, default: 'this is post title' },
+  body: { type: String, default: 'this is post body' },
   userId: { type: String },
 }, {
   timestamps: {},

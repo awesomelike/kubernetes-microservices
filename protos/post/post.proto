@@ -16,11 +16,17 @@ message PostResponse {
 }
 
 message PostListResponse {
-  repeated PostResponse = 1;
+  repeated PostResponse posts = 1;
 }
 
 message ListUserPostsRequest {
   string userId = 1;
+}
+
+message CreatePostRequest {
+  string title = 1;
+  string body = 2;
+  string userId = 3;
 }
 
 message Empty {}

@@ -18,7 +18,7 @@ async function init() {
   }
 
   // Setup gRPC
-  const address = `${process.env.GRPC_HOST}:${process.env.GRPC_PORT}`;
+  const address = `${process.env.GRPC_HOST}:${50052}`;
   grpcServer.bindAsync(address, grpc.ServerCredentials.createInsecure(), () => {
     grpcServer.start();
     console.log(`Server running at ${address}`);
