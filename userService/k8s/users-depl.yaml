@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: users-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: users-service
+    template:
+      metadata:
+        labels:
+          app: users-service
+      spec:
+        containers:
+        - name: ngm-users
+          image: ngm-users
+          ports:
+          - containerPort: 50051
+          env:
+          - name: MONGODB_USER
+            valueFrom:
+              secretKeyRef:
+                name: mongo-secret
+                key: MONGO_ROOT_USERNAME
+          - name: MONGODB_PASS
+            valueFrom:
+              secretKeyRef:
+                name: mongo-secret
+                key: MONGO_ROOT_PASSWORD
+          - name: MONGODB_SERVER
+            valueFrom:
+              configMapKeyRef:
+                name: mongo-configmap
+                key: MONGO_SERVER
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-service
+spec:
+  selector:
+    app: users-service
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 50051
+      targetPort: 50051
+      nodePort: 30000
+              
+
+        
