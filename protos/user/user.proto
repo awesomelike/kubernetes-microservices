@@ -32,6 +32,5 @@ message AuthRequest {
 
 message AuthResponse {
   string id = 1;
-  string name = 2;
   string email = 3;
 }

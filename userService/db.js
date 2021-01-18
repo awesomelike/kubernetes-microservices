@@ -21,10 +21,9 @@ class Database {
       useNewUrlParser: true,
       useFindAndModify: false,
       useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 5000
-    }, error => error && console.log('MongoDB Connection error:', error));
+      serverSelectionTimeoutMS: 5000,
+    }, (error) => error && console.log('MongoDB Connection error:', error));
   }
 }
 
 module.exports = Database;
-
