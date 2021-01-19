@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: users-depl
   labels:
     app: users-service
 spec:
@@ -8,32 +9,36 @@ spec:
   selector:
     matchLabels:
       app: users-service
-    template:
-      metadata:
-        labels:
-          app: users-service
-      spec:
-        containers:
-        - name: kubmic-users
-          image: kubmic-users
-          ports:
-          - containerPort: 50051
-          env:
-          - name: MONGODB_USER
-            valueFrom:
-              secretKeyRef:
-                name: users-mongo-secret
-                key: MONGO_ROOT_USERNAME
-          - name: MONGODB_PASS
-            valueFrom:
-              secretKeyRef:
-                name: users-mongo-secret
-                key: MONGO_ROOT_PASSWORD
-          - name: MONGODB_SERVER
-            valueFrom:
-              configMapKeyRef:
-                name: users-mongo-configmap
-                key: MONGO_SERVER
+  template:
+    metadata:
+      labels:
+        app: users-service
+    spec:
+      containers:
+      - name: kubmic-users
+        image: awesomelike/kubmic-users
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        ports:
+        - containerPort: 50051
+        env:
+        - name: MONGODB_USER
+          valueFrom:
+            secretKeyRef:
+              name: users-mongo-secret
+              key: MONGO_ROOT_USERNAME
+        - name: MONGODB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: users-mongo-secret
+              key: MONGO_ROOT_PASSWORD
+        - name: MONGODB_SERVER
+          valueFrom:
+            configMapKeyRef:
+              name: users-mongo-configmap
+              key: MONGO_SERVER
 ---
 apiVersion: v1
 kind: Service
@@ -47,7 +52,7 @@ spec:
     - protocol: TCP
       port: 50051
       targetPort: 50051
-      nodePort: 30000
+      # nodePort: 30000
               
 
         
