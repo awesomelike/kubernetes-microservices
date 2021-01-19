@@ -27,12 +27,12 @@ spec:
         - name: MONGODB_USER
           valueFrom:
             secretKeyRef:
-              name: users-mongo-secret
+              name: users-secret
               key: MONGO_ROOT_USERNAME
         - name: MONGODB_PASS
           valueFrom:
             secretKeyRef:
-              name: users-mongo-secret
+              name: users-secret
               key: MONGO_ROOT_PASSWORD
         - name: MONGODB_SERVER
           valueFrom:
@@ -49,6 +49,16 @@ spec:
             configMapKeyRef:
               name: users-configmap
               key: GRPC_PORT
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: users-secret
+              key: JWT_SECRET
+        - name: JWT_EXPIRATION
+          valueFrom:
+            configMapKeyRef:
+              name: users-configmap
+              key: JWT_EXPIRATION
 ---
 apiVersion: v1
 kind: Service

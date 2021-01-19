@@ -6,3 +6,4 @@ data:
   MONGO_SERVER: users-mongo-service
   GRPC_HOST: "0.0.0.0"
   GRPC_PORT: "50051"
+  JWT_EXPIRATION: "1h"
