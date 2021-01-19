@@ -12,6 +12,7 @@ class Database {
   constructor() {
     // eslint-disable-next-line max-len
     this.dbURI = `mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@${process.env.MONGODB_SERVER}`;
+    console.log('DB_URI', this.dbURI);
     mongoose.Promise = global.Promise;
   }
 

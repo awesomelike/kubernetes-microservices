@@ -5,7 +5,7 @@ const procedures = require('./procedures');
 
 const server = new grpc.Server();
 
-const PROTO_PATH = path.join(__dirname, '../../protos/user/user.proto');
+const PROTO_PATH = path.join(__dirname, 'user.proto');
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
   keepCase: true,
   longs: String,

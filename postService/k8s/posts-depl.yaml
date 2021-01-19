@@ -8,32 +8,36 @@ spec:
   selector:
     matchLabels:
       app: posts-service
-    template:
-      metadata:
-        labels:
-          app: posts-service
-      spec:
-        containers:
-        - name: kubmic-posts
-          image: kubmic-posts
-          ports:
-          - containerPort: 50052
-          env:
-          - name: MONGODB_USER
-            valueFrom:
-              secretKeyRef:
-                name: posts-mongo-secret
-                key: MONGO_ROOT_USERNAME
-          - name: MONGODB_PASS
-            valueFrom:
-              secretKeyRef:
-                name: posts-mongo-secret
-                key: MONGO_ROOT_PASSWORD
-          - name: MONGODB_SERVER
-            valueFrom:
-              configMapKeyRef:
-                name: posts-mongo-configmap
-                key: MONGO_SERVER
+  template:
+    metadata:
+      labels:
+        app: posts-service
+    spec:
+      containers:
+      - name: kubmic-posts
+        image: awesomelike/kubmic-posts
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        ports:
+        - containerPort: 50052
+        env:
+        - name: MONGODB_USER
+          valueFrom:
+            secretKeyRef:
+              name: posts-mongo-secret
+              key: MONGO_ROOT_USERNAME
+        - name: MONGODB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: posts-mongo-secret
+              key: MONGO_ROOT_PASSWORD
+        - name: MONGODB_SERVER
+          valueFrom:
+            configMapKeyRef:
+              name: posts-mongo-configmap
+              key: MONGO_SERVER
 ---
 apiVersion: v1
 kind: Service
@@ -47,7 +51,7 @@ spec:
     - protocol: TCP
       port: 50052
       targetPort: 50052
-      nodePort: 30001
+      # nodePort: 30001
               
 
         

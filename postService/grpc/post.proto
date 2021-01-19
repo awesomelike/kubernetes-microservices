@@ -1,0 +1,32 @@
+syntax="proto3";
+
+package postPackage;
+
+service PostService {
+  rpc listAll (Empty) returns (PostListResponse);
+  rpc create (CreatePostRequest) returns (PostResponse);
+  rpc listUserPosts (ListUserPostsRequest) returns (PostListResponse);
+}
+
+message PostResponse {
+  string id = 1;
+  string title = 2;
+  string body = 3;
+  string userId = 4;
+}
+
+message PostListResponse {
+  repeated PostResponse posts = 1;
+}
+
+message ListUserPostsRequest {
+  string userId = 1;
+}
+
+message CreatePostRequest {
+  string title = 1;
+  string body = 2;
+  string userId = 3;
+}
+
+message Empty {}
