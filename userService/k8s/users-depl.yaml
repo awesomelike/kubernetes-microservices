@@ -45,7 +45,7 @@ spec:
               name: users-configmap
               key: GRPC_HOST
         - name: GRPC_PORT
-          valuFrom:
+          valueFrom:
             configMapKeyRef:
               name: users-configmap
               key: GRPC_PORT
