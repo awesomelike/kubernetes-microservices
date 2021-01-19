@@ -14,7 +14,7 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 const { postPackage } = grpc.loadPackageDefinition(packageDefinition);
 const { PostService } = postPackage;
 
-const GRPC_HOST = process.env.GRPC_HOST || '0.0.0.0';
+const GRPC_HOST = process.env.POST_GRPC_HOST || '0.0.0.0';
 const GRPC_PORT = process.env.POST_GRPC_PORT || 50051;
 
 let client = new PostService(`${GRPC_HOST}:${GRPC_PORT}`, grpc.credentials.createInsecure());
