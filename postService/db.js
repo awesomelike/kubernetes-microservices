@@ -22,7 +22,9 @@ class Database {
       useFindAndModify: false,
       useUnifiedTopology: true,
       serverSelectionTimeoutMS: 5000,
-    }, (error) => error && console.log('MongoDB Connection error:', error));
+    }, (error) => {
+      console.log('MongoDB Connection error:', error);
+    });
   }
 }
 

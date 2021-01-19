@@ -39,6 +39,10 @@ spec:
             configMapKeyRef:
               name: users-mongo-configmap
               key: MONGO_SERVER
+        - name: GRPC_HOST
+          value: "0.0.0.0"
+        - name: GRPC_PORT
+          value: "50051"
 ---
 apiVersion: v1
 kind: Service

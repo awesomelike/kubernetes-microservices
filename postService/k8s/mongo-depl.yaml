@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: posts-mondo-depl
+  name: posts-mongo-depl
   labels:
     app: posts-mongodb
 spec:
@@ -38,7 +38,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: posts-mongodb-service
+  name: posts-mongo-service
 spec:
   selector:
     app: posts-mongodb
