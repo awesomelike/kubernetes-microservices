@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: users-configmap
+data:
+  MONGO_SERVER: users-mongo-service
+  GRPC_HOST: "0.0.0.0"
+  GRPC_PORT: "50051"

@@ -19,14 +19,4 @@ router.post('/create', auth, (req, res) => {
   })
 });
 
-router.post('/login', (req, res) => {
-  userService.login(req.body, (e, r) => {
-    if (e) {
-      return res.status(500).json(e);
-    }
-    console.log(r);
-    res.status(200).json(r);
-  })
-});
-
 module.exports = router;

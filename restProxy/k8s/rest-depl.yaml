@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rest-proxy
+  labels:
+    app: rest-proxy
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: rest-proxy
+  template:
+    metadata:
+      labels:
+        app: rest-proxy
+    spec:
+      containers:
+      - name: kubmic-proxy
+        image: awesomelike/kubmic-restproxy
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "256Mi"
+        ports:
+        - containerPort: 3000
+        env:
+        - name: PORT
+          valueFrom:
+            name: rest-proxy-configmap
+            key: PORT
+        - name: USER_GRPC_PORT
+          valueFrom:
+            name: users-configmap
+            key: GRPC_PORT
+        - name: POST_GRPC_PORT
+          valueFrom:
+            name: posts-configmap
+            key: GRPC_PORT
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rest-proxy-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: rest-proxy
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+

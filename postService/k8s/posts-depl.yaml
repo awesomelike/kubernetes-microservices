@@ -22,7 +22,7 @@ spec:
             cpu: "500m"
             memory: "512Mi"
         ports:
-        - containerPort: 50052
+        - containerPort: 50051
         env:
         - name: MONGODB_USER
           valueFrom:
@@ -37,12 +37,18 @@ spec:
         - name: MONGODB_SERVER
           valueFrom:
             configMapKeyRef:
-              name: posts-mongo-configmap
+              name: posts-configmap
               key: MONGO_SERVER
         - name: GRPC_HOST
-          value: "0.0.0.0"
+          valueFrom:
+            configMapKeyRef:
+              name: posts-configmap
+              key: GRPC_HOST
         - name: GRPC_PORT
-          value: "50052"
+          valuFrom:
+            configMapKeyRef:
+              name: posts-configmap
+              key: GRPC_PORT
 ---
 apiVersion: v1
 kind: Service
@@ -54,8 +60,8 @@ spec:
   type: ClusterIP
   ports:
     - protocol: TCP
-      port: 50052
-      targetPort: 50052
+      port: 50051
+      targetPort: 50051
       # nodePort: 30001
               
 
