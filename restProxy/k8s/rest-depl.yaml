@@ -29,11 +29,21 @@ spec:
             configMapKeyRef:
               name: rest-proxy-configmap
               key: PORT
+        - name: USER_GRPC_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: rest-proxy-configmap
+              key: USER_SERVICE
         - name: USER_GRPC_PORT
           valueFrom:
             configMapKeyRef:
               name: users-configmap
               key: GRPC_PORT
+        - name: POST_GRPC_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: rest-proxy-configmap
+              key: POST_SERVICE
         - name: POST_GRPC_PORT
           valueFrom:
             configMapKeyRef:

@@ -4,4 +4,5 @@ metadata:
   name: rest-proxy-configmap
 data:
   PORT: "3000"
-  
+  USER_SERVICE: users-service
+  POST_SERVICE: posts-service
