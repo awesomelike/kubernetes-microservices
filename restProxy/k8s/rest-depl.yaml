@@ -17,6 +17,7 @@ spec:
       containers:
       - name: kubmic-proxy
         image: awesomelike/kubmic-restproxy
+        imagePullPolicy: Always
         resources:
           limits:
             cpu: "500m"

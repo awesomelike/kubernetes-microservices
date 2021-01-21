@@ -3,7 +3,7 @@ const indexRouter = require('./routes');
 const app = express();
 const morgan = require('morgan');
 
-app.use(morgan());
+app.use(morgan('combined'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 indexRouter(app);
