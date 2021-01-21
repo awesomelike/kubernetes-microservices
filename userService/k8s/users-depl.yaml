@@ -17,6 +17,7 @@ spec:
       containers:
       - name: kubmic-users
         image: awesomelike/kubmic-users
+        imagePullPolicy: Always
         resources:
           limits:
             cpu: "500m"
