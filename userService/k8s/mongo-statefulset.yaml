@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: users-mongo-depl
+  labels:
+    app: users-mongodb
+spec:
+  serviceName: users-mongo-service
+  replicas: 1
+  selector:
+    matchLabels:
+      app: users-mongodb
+  template:
+    metadata:
+      labels:
+        app: users-mongodb
+    spec:
+      containers:
+      - name: users-mongodb
+        image: mongo
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "128Mi"
+        ports:
+        - containerPort: 27017
+        env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: users-secret
+              key: MONGO_ROOT_USERNAME
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: users-secret
+              key: MONGO_ROOT_PASSWORD
+        volumeMounts:
+          - name: data
+            mountPath: /data/db
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: users-volume-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-mongo-service
+spec:
+  selector:
+    app: users-mongodb
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
