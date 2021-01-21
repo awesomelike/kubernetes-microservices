@@ -23,7 +23,10 @@ class Database {
       useUnifiedTopology: true,
       serverSelectionTimeoutMS: 5000,
     }, (error) => {
-      console.log('MongoDB Connection error:', error);
+      if (error) {
+        console.log('MongoDB Connection error:', error);
+        process.exit(1);
+      }
     });
   }
 }
