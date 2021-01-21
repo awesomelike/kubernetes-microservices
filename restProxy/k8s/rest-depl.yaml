@@ -19,6 +19,9 @@ spec:
         image: awesomelike/kubmic-restproxy
         imagePullPolicy: Always
         resources:
+          requests:
+            cpu: "50m"
+            memory: "50Mi"
           limits:
             cpu: "500m"
             memory: "256Mi"
