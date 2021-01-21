@@ -29,3 +29,9 @@ jobs:
       - name: Build rest proxy service
         run: |
           docker build -t awesomelike/kubmic-restproxy ./restProxy
+      
+      - name: Push images to the registry
+        run: |
+          docker push awesomelike/kubmic-users
+          docker push awesomelike/kubmic-posts
+          docker push awesomelike/kubmic-restproxy
