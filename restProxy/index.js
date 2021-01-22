@@ -12,6 +12,10 @@ let flag = true;
 
 const port = process.env.PORT || 3000;
 
+app.get('/version', (req, res) => {
+  res.status(200).json({message: 'API Version 2'});
+})
+
 app.get('/ready', (req, res) => {
   res.sendStatus(200);
 });

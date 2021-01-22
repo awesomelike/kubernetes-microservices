@@ -6,6 +6,11 @@ metadata:
     app: rest-proxy
 spec:
   replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
   selector:
     matchLabels:
       app: rest-proxy
@@ -16,7 +21,7 @@ spec:
     spec:
       containers:
       - name: kubmic-proxy
-        image: awesomelike/kubmic-restproxy
+        image: localhost:5000/kubmic-restproxy:1
         imagePullPolicy: Always
         resources:
           requests:
@@ -27,6 +32,13 @@ spec:
             memory: "256Mi"
         ports:
         - containerPort: 3000
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
         env:
         - name: PORT
           valueFrom:

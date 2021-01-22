@@ -31,7 +31,9 @@ jobs:
           docker build -t awesomelike/kubmic-restproxy ./restProxy
       
       - name: Push images to the registry
+        env:
+          RUN_NUMBER: ${{ github.run_number }}
         run: |
-          docker push awesomelike/kubmic-users
-          docker push awesomelike/kubmic-posts
-          docker push awesomelike/kubmic-restproxy
+          docker push awesomelike/kubmic-users:$RUN_NUMBER
+          docker push awesomelike/kubmic-posts:$RUN_NUMBER
+          docker push awesomelike/kubmic-restproxy:$RUN_NUMBER
