@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      RUN_NUMBER: ${{ github.run_number }}
     steps:
       - uses: actions/checkout@v2
       
@@ -20,19 +22,17 @@ jobs:
       
       - name: Build users service
         run: |
-          docker build -t awesomelike/kubmic-users ./userService
+          docker build -t awesomelike/kubmic-users:$RUN_NUMBER ./userService
 
       - name: Build posts service
         run: |
-          docker build -t awesomelike/kubmic-posts ./postService
+          docker build -t awesomelike/kubmic-posts:$RUN_NUMBER ./postService
       
       - name: Build rest proxy service
         run: |
-          docker build -t awesomelike/kubmic-restproxy ./restProxy
+          docker build -t awesomelike/kubmic-restproxy:$RUN_NUMBER ./restProxy
       
       - name: Push images to the registry
-        env:
-          RUN_NUMBER: ${{ github.run_number }}
         run: |
           docker push awesomelike/kubmic-users:$RUN_NUMBER
           docker push awesomelike/kubmic-posts:$RUN_NUMBER
