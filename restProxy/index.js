@@ -8,16 +8,24 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 indexRouter(app);
 
+let flag = true;
+
 const port = process.env.PORT || 3000; 
-app.get('/', (req, res) => {
+app.get('/loadCpu', (req, res) => {
+  flag = true;
   res.sendStatus(200);
-  while(true) {
-    for (let i=1; i<1000; i++) {
-      const x = Math.random();
-      console.log('INFINITE!');
-    }
+  for (let i=1; i< Math.pow(10, 6); i++) {
+    const x = Math.random();
+    console.log('INFINITE!', x);
   }
-})
+});
+
+app.get('/unloadCpu', (req, res) => {
+  flag = false;
+  res.sendStatus(200);
+});
+
+
 app.listen(port, () => {
   console.log("Server started!");
 })
