@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: kubmic-proxy
-        image: localhost:5000/kubmic-restproxy:1
+        image: awesomelike/kubmic-restproxy:1
         imagePullPolicy: Always
         resources:
           requests:
