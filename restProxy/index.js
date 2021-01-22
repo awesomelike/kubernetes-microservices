@@ -10,7 +10,12 @@ indexRouter(app);
 
 let flag = true;
 
-const port = process.env.PORT || 3000; 
+const port = process.env.PORT || 3000;
+
+app.get('/ready', (req, res) => {
+  res.sendStatus(200);
+});
+
 app.get('/loadCpu', (req, res) => {
   flag = true;
   res.sendStatus(200);
