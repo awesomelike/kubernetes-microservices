@@ -17,7 +17,7 @@ spec:
       containers:
       - name: kubmic-posts
         image: awesomelike/kubmic-posts
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         resources:
           limits:
             cpu: "100m"

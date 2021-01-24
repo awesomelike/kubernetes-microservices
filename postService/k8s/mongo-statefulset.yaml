@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: posts-mongo-sts
+  labels:
+    app: posts-mongodb
+spec:
+  serviceName: posts-mongo-service
+  replicas: 1
+  selector:
+    matchLabels:
+      app: posts-mongodb
+  template:
+    metadata:
+      labels:
+        app: posts-mongodb
+    spec:
+      containers:
+      - name: posts-mongodb
+        image: mongo
+        resources:
+          limits:
+            cpu: "100m"
+            memory: "100Mi"
+        ports:
+        - containerPort: 27017
+        env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: posts-mongo-secret
+              key: MONGO_ROOT_USERNAME
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: posts-mongo-secret
+              key: MONGO_ROOT_PASSWORD
+        volumeMounts:
+          - name: postsdata
+            mountPath: posts/data/db
+      volumes:
+        - name: postsdata
+          persistentVolumeClaim:
+            claimName: posts-volume-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-mongo-service
+spec:
+  selector:
+    app: posts-mongodb
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
