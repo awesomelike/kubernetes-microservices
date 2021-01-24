@@ -23,7 +23,7 @@ app.get('/ready', (req, res) => {
 app.get('/loadCpu', (req, res) => {
   flag = true;
   res.sendStatus(200);
-  for (let i=1; i< Math.pow(10, 6); i++) {
+  for (let i=1; i< Math.pow(10, 6) / 2; i++) {
     const x = Math.random();
     console.log('INFINITE!', x);
   }

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: users-mongo-depl
+  name: users-mongo-sts
   labels:
     app: users-mongodb
 spec:

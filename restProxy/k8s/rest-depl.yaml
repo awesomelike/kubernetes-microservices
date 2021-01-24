@@ -22,7 +22,7 @@ spec:
       containers:
       - name: kubmic-proxy
         image: awesomelike/kubmic-restproxy:1
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         resources:
           requests:
             cpu: "50m"
